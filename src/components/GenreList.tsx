@@ -23,9 +23,9 @@ const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
   if (isLoading) return <Spinner></Spinner>;
 
   return (
-    <List>
+    <List spacing={3}>
       {data.map((genre) => (
-        <ListItem key={genre.id} paddingY={"6px"}>
+        <ListItem key={genre.id}>
           <HStack>
             <Image
               src={getCroppedImageUrl(genre.image_background)}
