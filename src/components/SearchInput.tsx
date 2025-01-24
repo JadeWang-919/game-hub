@@ -7,7 +7,7 @@ interface Props {
 }
 
 const SearchInput = ({ onSearch }: Props) => {
-  const ref = useRef<HTMLInputElement>(null);
+  const ref = useRef<HTMLInputElement>(null); // useRef is a hook that creates a reference to an element, in this case an input element. It doesn't cause a re-render when the value changes, so it's useful for storing mutable values that don't affect the rendering of the component.
   return (
     <form
       onSubmit={(e) => {
