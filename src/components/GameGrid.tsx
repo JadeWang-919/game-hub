@@ -23,33 +23,35 @@ const GameGrid = () => {
     data?.pages.reduce((acc, page) => acc + page.results.length, 0) || 0;
 
   return (
-    <Box padding={6}>
-      <InfiniteScroll
-        dataLength={fetchedGamesCount}
-        next={() => fetchNextPage()}
-        hasMore={!!hasNextPage}
-        loader={<Spinner marginY={4} />}
+    <InfiniteScroll
+      dataLength={fetchedGamesCount}
+      next={() => fetchNextPage()}
+      hasMore={!!hasNextPage}
+      loader={<Spinner marginY={4} marginLeft={6} />}
+    >
+      <SimpleGrid
+        columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
+        spacing={6}
+        padding={6}
       >
-        <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={6}>
-          {isLoading &&
-            skeletons.map((skeleton) => (
-              <GameCardContainer key={skeleton}>
-                <GameCardSkeleton></GameCardSkeleton>
+        {isLoading &&
+          skeletons.map((skeleton) => (
+            <GameCardContainer key={skeleton}>
+              <GameCardSkeleton></GameCardSkeleton>
+            </GameCardContainer>
+          ))}
+
+        {data?.pages.map((page, index) => (
+          <React.Fragment key={index}>
+            {page.results.map((game) => (
+              <GameCardContainer key={game.id}>
+                <GameCard game={game}></GameCard>
               </GameCardContainer>
             ))}
-
-          {data?.pages.map((page, index) => (
-            <React.Fragment key={index}>
-              {page.results.map((game) => (
-                <GameCardContainer key={game.id}>
-                  <GameCard game={game}></GameCard>
-                </GameCardContainer>
-              ))}
-            </React.Fragment>
-          ))}
-        </SimpleGrid>
-      </InfiniteScroll>
-    </Box>
+          </React.Fragment>
+        ))}
+      </SimpleGrid>
+    </InfiniteScroll>
   );
 };
 
