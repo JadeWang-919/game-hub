@@ -1,17 +1,21 @@
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { useRef } from "react";
 import { BsSearch } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 import useGameQueryStore from "../store";
 
 const SearchInput = () => {
   const ref = useRef<HTMLInputElement>(null); // useRef is a hook that creates a reference to an element, in this case an input element. It doesn't cause a re-render when the value changes, so it's useful for storing mutable values that don't affect the rendering of the component.
   const setSearchText = useGameQueryStore((s) => s.setSearchText);
+  const navigate = useNavigate();
+
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
         if (ref.current) {
           setSearchText(ref.current.value);
+          navigate("/");
         }
       }}
     >
