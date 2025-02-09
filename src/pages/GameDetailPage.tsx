@@ -32,7 +32,6 @@ const GameDetailPage = () => {
         <GameAttributes game={game}></GameAttributes>
       </GridItem>
       <GridItem>
-        {" "}
         <GameTrailer gameId={game.id}></GameTrailer>
         <GameScreenshots gameId={game.id}></GameScreenshots>
       </GridItem>
